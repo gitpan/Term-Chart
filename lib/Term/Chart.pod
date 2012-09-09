@@ -1,0 +1,278 @@
+=head1 NAME
+
+Term::Chart - Create attractive horizontal bar charts for the terminal interface.
+
+=head1 SYNOPSIS
+
+  use Term::Chart;
+
+  my $tc = Term::Chart->new();
+
+  for my $number ( 1 .. 10 ) {
+
+      $tc->add_value( { value => $number } );
+  }
+
+  $tc->print(), "\n";
+
+=head3 HTML approximation of the output
+
+=begin html
+
+ <div style="background-color:#000;padding:15px;color:#fff;font-family: monospace;">
+&#9656;<br/>
+&#9552;&#9656;<br/>
+&#9552;&#9552;&#9552;&#9656;<br/>
+&#9552;&#9552;&#9552;&#9552;&#9552;&#9656;<br/>
+&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9656;<br/>
+&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9656;<br/>
+&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9656;<br/>
+&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9656;<br/>
+&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9656;<br/>
+&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9656;<br/>
+&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9656;
+ </div>
+
+=end html
+
+=head1 SOMETHING ELABORATE
+
+  use Term::Chart;
+
+  my $tc = Term::Chart->new(
+      {   default_style => 11,
+          color_range   => [ 160 .. 195 ],
+      }
+  );
+
+  for ( 1 .. 10 ) {
+
+      for my $n (qw( 1 2 3 4 5 6 5 4 3 2 )) {
+
+          my %datum = (
+              value => $n,
+              label => ( 'label ' . $n x $n ),
+          );
+          $tc->add_value( \%datum );
+      }
+  }
+
+  $tc->print(), "\n";
+
+=head3 HTML approximation of the output
+
+=begin html
+
+ <div style="background-color:#000;padding:15px;color:#fff;font-family: monospace;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label : <span style="color:#D70000">&#9679;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label 1: <span style="color:#D70000">&#9552;</span><span style="color:#D70000">&#9552;</span><span style="color:#CA015A">&#9552;</span><span style="color:#CA015A">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9679;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label 22: <span style="color:#D70000">&#9552;</span><span style="color:#D70000">&#9552;</span><span style="color:#CA015A">&#9552;</span><span style="color:#CA015A">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01EF">&#9552;</span><span style="color:#CA01EF">&#9552;</span><span style="color:#CA5A01">&#9552;</span><span style="color:#CA5A01">&#9679;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label 333: <span style="color:#D70000">&#9552;</span><span style="color:#D70000">&#9552;</span><span style="color:#CA015A">&#9552;</span><span style="color:#CA015A">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01EF">&#9552;</span><span style="color:#CA01EF">&#9552;</span><span style="color:#CA5A01">&#9552;</span><span style="color:#CA5A01">&#9552;</span><span style="color:#CA5A5A">&#9552;</span><span style="color:#CA5A5A">&#9552;</span><span style="color:#CA5A5A">&#9552;</span><span style="color:#CA5A7F">&#9552;</span><span style="color:#CA5A7F">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9679;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label 4444: <span style="color:#D70000">&#9552;</span><span style="color:#D70000">&#9552;</span><span style="color:#CA015A">&#9552;</span><span style="color:#CA015A">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01EF">&#9552;</span><span style="color:#CA01EF">&#9552;</span><span style="color:#CA5A01">&#9552;</span><span style="color:#CA5A01">&#9552;</span><span style="color:#CA5A5A">&#9552;</span><span style="color:#CA5A5A">&#9552;</span><span style="color:#CA5A5A">&#9552;</span><span style="color:#CA5A7F">&#9552;</span><span style="color:#CA5A7F">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5ACA">&#9552;</span><span style="color:#CA5ACA">&#9552;</span><span style="color:#CA5AEF">&#9552;</span><span style="color:#CA5AEF">&#9552;</span><span style="color:#CA5AEF">&#9552;</span><span style="color:#CA7F01">&#9552;</span><span style="color:#CA7F01">&#9552;</span><span style="color:#CA7F5A">&#9679;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;label 55555: <span style="color:#D70000">&#9552;</span><span style="color:#D70000">&#9552;</span><span style="color:#CA015A">&#9552;</span><span style="color:#CA015A">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01EF">&#9552;</span><span style="color:#CA01EF">&#9552;</span><span style="color:#CA5A01">&#9552;</span><span style="color:#CA5A01">&#9552;</span><span style="color:#CA5A5A">&#9552;</span><span style="color:#CA5A5A">&#9552;</span><span style="color:#CA5A5A">&#9552;</span><span style="color:#CA5A7F">&#9552;</span><span style="color:#CA5A7F">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5ACA">&#9552;</span><span style="color:#CA5ACA">&#9552;</span><span style="color:#CA5AEF">&#9552;</span><span style="color:#CA5AEF">&#9552;</span><span style="color:#CA5AEF">&#9552;</span><span style="color:#CA7F01">&#9552;</span><span style="color:#CA7F01">&#9552;</span><span style="color:#CA7F5A">&#9552;</span><span style="color:#CA7F5A">&#9552;</span><span style="color:#CA7F7F">&#9552;</span><span style="color:#CA7F7F">&#9552;</span><span style="color:#CA7F7F">&#9552;</span><span style="color:#CA7FA4">&#9552;</span><span style="color:#CA7FA4">&#9552;</span><span style="color:#CA7FCA">&#9552;</span><span style="color:#CA7FCA">&#9552;</span><span style="color:#CA7FCA">&#9552;</span><span style="color:#CA7FEF">&#9679;</span><br/>
+&nbsp;&nbsp;&nbsp;label 666666: <span style="color:#D70000">&#9552;</span><span style="color:#D70000">&#9552;</span><span style="color:#CA015A">&#9552;</span><span style="color:#CA015A">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01EF">&#9552;</span><span style="color:#CA01EF">&#9552;</span><span style="color:#CA5A01">&#9552;</span><span style="color:#CA5A01">&#9552;</span><span style="color:#CA5A5A">&#9552;</span><span style="color:#CA5A5A">&#9552;</span><span style="color:#CA5A5A">&#9552;</span><span style="color:#CA5A7F">&#9552;</span><span style="color:#CA5A7F">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5ACA">&#9552;</span><span style="color:#CA5ACA">&#9552;</span><span style="color:#CA5AEF">&#9552;</span><span style="color:#CA5AEF">&#9552;</span><span style="color:#CA5AEF">&#9552;</span><span style="color:#CA7F01">&#9552;</span><span style="color:#CA7F01">&#9552;</span><span style="color:#CA7F5A">&#9552;</span><span style="color:#CA7F5A">&#9552;</span><span style="color:#CA7F7F">&#9552;</span><span style="color:#CA7F7F">&#9552;</span><span style="color:#CA7F7F">&#9552;</span><span style="color:#CA7FA4">&#9552;</span><span style="color:#CA7FA4">&#9552;</span><span style="color:#CA7FCA">&#9552;</span><span style="color:#CA7FCA">&#9552;</span><span style="color:#CA7FCA">&#9552;</span><span style="color:#CA7FEF">&#9552;</span><span style="color:#CA7FEF">&#9552;</span><span style="color:#CAA401">&#9552;</span><span style="color:#CAA401">&#9552;</span><span style="color:#CAA45A">&#9552;</span><span style="color:#CAA45A">&#9552;</span><span style="color:#CAA45A">&#9552;</span><span style="color:#CAA47F">&#9552;</span><span style="color:#CAA47F">&#9552;</span><span style="color:#CAA47F">&#9679;</span><br/>
+&nbsp;&nbsp;label 7777777: <span style="color:#D70000">&#9552;</span><span style="color:#D70000">&#9552;</span><span style="color:#CA015A">&#9552;</span><span style="color:#CA015A">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01EF">&#9552;</span><span style="color:#CA01EF">&#9552;</span><span style="color:#CA5A01">&#9552;</span><span style="color:#CA5A01">&#9552;</span><span style="color:#CA5A5A">&#9552;</span><span style="color:#CA5A5A">&#9552;</span><span style="color:#CA5A5A">&#9552;</span><span style="color:#CA5A7F">&#9552;</span><span style="color:#CA5A7F">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5ACA">&#9552;</span><span style="color:#CA5ACA">&#9552;</span><span style="color:#CA5AEF">&#9552;</span><span style="color:#CA5AEF">&#9552;</span><span style="color:#CA5AEF">&#9552;</span><span style="color:#CA7F01">&#9552;</span><span style="color:#CA7F01">&#9552;</span><span style="color:#CA7F5A">&#9552;</span><span style="color:#CA7F5A">&#9552;</span><span style="color:#CA7F7F">&#9552;</span><span style="color:#CA7F7F">&#9552;</span><span style="color:#CA7F7F">&#9552;</span><span style="color:#CA7FA4">&#9552;</span><span style="color:#CA7FA4">&#9552;</span><span style="color:#CA7FCA">&#9552;</span><span style="color:#CA7FCA">&#9552;</span><span style="color:#CA7FCA">&#9552;</span><span style="color:#CA7FEF">&#9552;</span><span style="color:#CA7FEF">&#9552;</span><span style="color:#CAA401">&#9552;</span><span style="color:#CAA401">&#9552;</span><span style="color:#CAA45A">&#9552;</span><span style="color:#CAA45A">&#9552;</span><span style="color:#CAA45A">&#9552;</span><span style="color:#CAA47F">&#9552;</span><span style="color:#CAA47F">&#9552;</span><span style="color:#CAA4A4">&#9552;</span><span style="color:#CAA4A4">&#9552;</span><span style="color:#CAA4A4">&#9552;</span><span style="color:#CAA4A4">&#9552;</span><span style="color:#CAA4A4">&#9552;</span><span style="color:#CAA4CA">&#9552;</span><span style="color:#CAA4CA">&#9552;</span><span style="color:#CAA4EF">&#9552;</span><span style="color:#CAA4EF">&#9552;</span><span style="color:#CAA4EF">&#9679;</span><br/>
+&nbsp;label 88888888: <span style="color:#D70000">&#9552;</span><span style="color:#D70000">&#9552;</span><span style="color:#CA015A">&#9552;</span><span style="color:#CA015A">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01EF">&#9552;</span><span style="color:#CA01EF">&#9552;</span><span style="color:#CA5A01">&#9552;</span><span style="color:#CA5A01">&#9552;</span><span style="color:#CA5A5A">&#9552;</span><span style="color:#CA5A5A">&#9552;</span><span style="color:#CA5A5A">&#9552;</span><span style="color:#CA5A7F">&#9552;</span><span style="color:#CA5A7F">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5ACA">&#9552;</span><span style="color:#CA5ACA">&#9552;</span><span style="color:#CA5AEF">&#9552;</span><span style="color:#CA5AEF">&#9552;</span><span style="color:#CA5AEF">&#9552;</span><span style="color:#CA7F01">&#9552;</span><span style="color:#CA7F01">&#9552;</span><span style="color:#CA7F5A">&#9552;</span><span style="color:#CA7F5A">&#9552;</span><span style="color:#CA7F7F">&#9552;</span><span style="color:#CA7F7F">&#9552;</span><span style="color:#CA7F7F">&#9552;</span><span style="color:#CA7FA4">&#9552;</span><span style="color:#CA7FA4">&#9552;</span><span style="color:#CA7FCA">&#9552;</span><span style="color:#CA7FCA">&#9552;</span><span style="color:#CA7FCA">&#9552;</span><span style="color:#CA7FEF">&#9552;</span><span style="color:#CA7FEF">&#9552;</span><span style="color:#CAA401">&#9552;</span><span style="color:#CAA401">&#9552;</span><span style="color:#CAA45A">&#9552;</span><span style="color:#CAA45A">&#9552;</span><span style="color:#CAA45A">&#9552;</span><span style="color:#CAA47F">&#9552;</span><span style="color:#CAA47F">&#9552;</span><span style="color:#CAA4A4">&#9552;</span><span style="color:#CAA4A4">&#9552;</span><span style="color:#CAA4A4">&#9552;</span><span style="color:#CAA4A4">&#9552;</span><span style="color:#CAA4A4">&#9552;</span><span style="color:#CAA4CA">&#9552;</span><span style="color:#CAA4CA">&#9552;</span><span style="color:#CAA4EF">&#9552;</span><span style="color:#CAA4EF">&#9552;</span><span style="color:#CAA4EF">&#9552;</span><span style="color:#CACA01">&#9552;</span><span style="color:#CACA01">&#9552;</span><span style="color:#CACA5A">&#9552;</span><span style="color:#CACA5A">&#9552;</span><span style="color:#CACAA4">&#9552;</span><span style="color:#CACAA4">&#9552;</span><span style="color:#CACAA4">&#9552;</span><span style="color:#CACAEF">&#9552;</span><span style="color:#CACAEF">&#9679;</span><br/>
+label 999999999: <span style="color:#D70000">&#9552;</span><span style="color:#D70000">&#9552;</span><span style="color:#CA015A">&#9552;</span><span style="color:#CA015A">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA017F">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01A4">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01CA">&#9552;</span><span style="color:#CA01EF">&#9552;</span><span style="color:#CA01EF">&#9552;</span><span style="color:#CA5A01">&#9552;</span><span style="color:#CA5A01">&#9552;</span><span style="color:#CA5A5A">&#9552;</span><span style="color:#CA5A5A">&#9552;</span><span style="color:#CA5A5A">&#9552;</span><span style="color:#CA5A7F">&#9552;</span><span style="color:#CA5A7F">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5AA4">&#9552;</span><span style="color:#CA5ACA">&#9552;</span><span style="color:#CA5ACA">&#9552;</span><span style="color:#CA5AEF">&#9552;</span><span style="color:#CA5AEF">&#9552;</span><span style="color:#CA5AEF">&#9552;</span><span style="color:#CA7F01">&#9552;</span><span style="color:#CA7F01">&#9552;</span><span style="color:#CA7F5A">&#9552;</span><span style="color:#CA7F5A">&#9552;</span><span style="color:#CA7F7F">&#9552;</span><span style="color:#CA7F7F">&#9552;</span><span style="color:#CA7F7F">&#9552;</span><span style="color:#CA7FA4">&#9552;</span><span style="color:#CA7FA4">&#9552;</span><span style="color:#CA7FCA">&#9552;</span><span style="color:#CA7FCA">&#9552;</span><span style="color:#CA7FCA">&#9552;</span><span style="color:#CA7FEF">&#9552;</span><span style="color:#CA7FEF">&#9552;</span><span style="color:#CAA401">&#9552;</span><span style="color:#CAA401">&#9552;</span><span style="color:#CAA45A">&#9552;</span><span style="color:#CAA45A">&#9552;</span><span style="color:#CAA45A">&#9552;</span><span style="color:#CAA47F">&#9552;</span><span style="color:#CAA47F">&#9552;</span><span style="color:#CAA4A4">&#9552;</span><span style="color:#CAA4A4">&#9552;</span><span style="color:#CAA4A4">&#9552;</span><span style="color:#CAA4A4">&#9552;</span><span style="color:#CAA4A4">&#9552;</span><span style="color:#CAA4CA">&#9552;</span><span style="color:#CAA4CA">&#9552;</span><span style="color:#CAA4EF">&#9552;</span><span style="color:#CAA4EF">&#9552;</span><span style="color:#CAA4EF">&#9552;</span><span style="color:#CACA01">&#9552;</span><span style="color:#CACA01">&#9552;</span><span style="color:#CACA5A">&#9552;</span><span style="color:#CACA5A">&#9552;</span><span style="color:#CACAA4">&#9552;</span><span style="color:#CACAA4">&#9552;</span><span style="color:#CACAA4">&#9552;</span><span style="color:#CACAEF">&#9552;</span><span style="color:#CACAEF">&#9552;</span><span style="color:#CAEF01">&#9552;</span><span style="color:#CAEF01">&#9552;</span><span style="color:#CAEF7F">&#9552;</span><span style="color:#CAEF7F">&#9552;</span><span style="color:#CAEF7F">&#9552;</span><span style="color:#CAEFA4">&#9552;</span><span style="color:#CAEFA4">&#9552;</span><span style="color:#D7FFFF">&#9552;</span><span style="color:#D7FFFF">&#9552;</span><span style="color:#D7FFFF">&#9679;</span> </div>
+
+=end html
+
+
+=head1 DESCRIPTION
+
+This module offers you a convenient way to create horizontal bar charts for
+your command line programs.
+
+The charts can include ANSI color markup and Unicode drawing characters.
+The characters used and the presence of ANSI color codes is configurable.
+
+=head1 METHODS
+
+=head2 new
+
+The constructor accepts a hash ref with two optional parameters.
+
+=over
+
+=item color_range
+
+Use this to offer a range of color values which will be used accross each
+horiontal bar.
+
+=item default_style
+
+This controls which characters are used to create the bars in your bar chart.
+Accepts an integer which is among:
+
+=over
+
+=item * '0'
+
+=begin html
+
+&#9552;&#9656;
+
+=end html
+
+=item * '1'
+
+=begin html
+
+&#9552;&#9657;
+
+=end html
+
+=item * '2'
+
+=begin html
+
+&#9552;&#9658;
+
+=end html
+
+=item * '3'
+
+=begin html
+
+&#9552;&#9659;
+
+=end html
+
+=item * '4'
+
+=begin html
+
+&#9723;&#9655;
+
+=end html
+
+=item * '5'
+
+=begin html
+
+&#9723;&#9723;
+
+=end html
+
+=item * '6'
+
+=begin html
+
+&#9724;&#9654;
+
+=end html
+
+=item * '7'
+
+=begin html
+
+&#9724;&#9687;
+
+=end html
+
+=item * '8'
+
+=begin html
+
+&#9724;&#9724;
+
+=end html
+
+=item * '9'
+
+=begin html
+
+&#9552;&#9670;
+
+=end html
+
+=item * '10'
+
+=begin html
+
+&#9552;&#9671;
+
+=end html
+
+=item * '11'
+
+=begin html
+
+&#9552;&#9679;
+
+=end html
+
+=item * '12'
+
+=begin html
+
+&#9552;&#9675;
+
+=end html
+
+=back
+
+=back
+
+=head2 add_value
+
+Add a value to be graphed. Accepts a hash ref with:
+
+=over
+
+=item label
+
+Optional label will be rendered to the left of each bar.
+
+=item value
+
+The numeric value being graphed.
+
+=item color
+
+Optional ANSI foreground color. This will override any colors given in the
+color_range constructor parameter.
+
+=item bg_color
+
+Optional ANSI background color.
+
+=item char
+
+The character to use for the bar. This will override the character related
+to the style indicated in the default_style constructor parameter.
+
+=item last_char
+
+The last (right most) character of each bar can be different from the rest of
+the bar. This will override the last character related to the style indicated
+in the default_style constructor parameter.
+
+=back
+
+=head2 render
+
+This constructs the bar chart as a blob of text and returns it.
+
+=head2 print
+
+This will print the rendered chart to STDOUT.
+
+=head1 TODO
+
+Consider a vertical bar chart, and perhaps a crude pie chart?
+
+=head1 AUTHOR
+
+Dylan Doxey, E<lt>dylan@cpan.orgE<gt>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2012 by Dylan Doxey
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.14.2 or,
+at your option, any later version of Perl 5 you may have available.
+
+
+=cut
