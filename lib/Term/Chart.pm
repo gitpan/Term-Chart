@@ -1,8 +1,8 @@
 package Term::Chart;
 
-$VERSION = '0.01';
+$VERSION = '0.02';
 
-use 5.014002;
+use 5.010000;
 use strict;
 use warnings;
 {

@@ -10,7 +10,7 @@
         $: ansi_emitting_program.pl | ansi2html
 
     It was intended to create the POD snippets but the hex values
-    are wrong which makes it somewhat meaningless for now.
+    are wrong which makes this program an undocumented TODO item.
 
 =cut
 
